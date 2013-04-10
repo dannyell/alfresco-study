@@ -1,0 +1,28 @@
+<alfresco-config>
+	<config evaluator="string-compare" condition="DocLibActions">
+		<actions>
+			<action id="ixxus.doclib.action.sample" icon="sample-action" type="javascript" label="action.ixxus.sample">
+				<param name="function">onActionSample</param>
+				<param name="successMessage">message.sample.success</param>
+				<param name="failureMessage">message.sample.failure</param>
+				<evaluator negate="false">ixxus.sample.evaluator</evaluator>
+			</action>
+		</actions>
+		<actionGroups>
+			<actionGroup id="document-browse">
+				<action index="400" id="ixxus.doclib.action.sample" />
+			</actionGroup>
+			<actionGroup id="document-details">
+				<action index="400" id="ixxus.doclib.action.sample" />
+			</actionGroup>
+		</actionGroups>
+	</config>
+	
+	<config evaluator="string-compare" condition="DocLibCustom">
+          <dependencies>
+             <js src="components/MultiServicesSearch/sample-action.js" />
+          </dependencies>
+       <dependencies />
+    </config>
+	
+</alfresco-config>

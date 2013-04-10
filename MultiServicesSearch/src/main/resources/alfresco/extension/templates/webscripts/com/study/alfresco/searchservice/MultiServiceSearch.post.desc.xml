@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<webscript>
-	<shortname>Multi Service Search</shortname>
-	<description>Multi Service Search</description>
-	<url>/study/MultiServiceSearch?filter=${input}</url>
-	<format default="json"/>
-	<authentication>user</authentication>
-	<family>Alfresco Java-Backed WebScripts Demo</family>
-</webscript>

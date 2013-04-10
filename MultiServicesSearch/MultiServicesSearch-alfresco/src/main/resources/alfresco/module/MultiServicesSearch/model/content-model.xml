@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<model name="sample:model" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <description>Ixxus empty sample model</description>
+    <author>Szabolcs Illes</author>
+    <version>1.0</version>
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <!-- Import Alfresco Definitions -->
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm" />
+        <import uri="http://www.alfresco.org/model/application/1.0" prefix="app" />
+        <import uri="http://www.alfresco.org/model/wcmmodel/1.0" prefix="wcm" />
+        <import uri="http://www.alfresco.org/model/forum/1.0" prefix="fm" />
+        <import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+    </imports>
+
+    <!-- Introduction of new namespaces defined by this model -->
+    <namespaces>
+        <namespace uri="http://www.ixxus.co.uk/model/MultiServicesSearch/1.0" prefix="sample" />
+    </namespaces>
+
+    <constraints/>
+    <types/>
+    <aspects/>
+    
+</model>

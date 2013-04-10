@@ -1,219 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.study</groupId>
-  <artifactId>MultiServicesSearch</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <name>MultiServicesSearch</name>
-  
-  
-  	<dependencies>
 
-		<dependency>
-			<groupId>com.ixxus.alfresco</groupId>
-			<artifactId>ixxus-alfresco-sdk</artifactId>
-			<version>4.1.1.0.1.5</version>
-			<type>pom</type>
-			<scope>provided</scope>
-		</dependency>
+    <modelVersion>4.0.0</modelVersion>
 
-		<dependency>
-			<groupId>com.ixxus.alfresco</groupId>
-			<artifactId>alfresco-config</artifactId>
-			<version>4.1.2.0.0.1</version>
-			<scope>provided</scope>
-		</dependency>
+    <parent>
+        <groupId>com.ixxus</groupId>
+        <artifactId>ixxus-maven-super-pom</artifactId>
+        <version>1.0.3</version>
+    </parent>
 
-		<dependency>
-			<groupId>com.ixxus.test</groupId>
-			<artifactId>test-utils</artifactId>
-			<version>4.1.2.0.0.2</version>
-			<scope>test</scope>
-		</dependency>
+    <groupId>com.study.alfresco</groupId>
+    <artifactId>MultiServicesSearch</artifactId>
+    <version>4.1.3.1.0-SNAPSHOT</version>
 
-		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path</artifactId>
-			<version>0.8.1</version>
-			<scope>test</scope>
-		</dependency>
+    <packaging>pom</packaging>
+    <url>https://wiki.ixxus.co.uk</url>
 
-		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path-assert</artifactId>
-			<version>0.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		
+    <scm>
+        <connection>scm:git:git@github.com:ixxus/MultiServicesSearch.git</connection>
+        <developerConnection>scm:git:git@github.com:ixxus/MultiServicesSearch.git</developerConnection>
+        <url>https://github.com/ixxus/MultiServicesSearch.git</url>
+    </scm>
+
+    <properties>
+        <alfresco.version>4.1.3</alfresco.version>
+        <alfresco.classifier>enterprise</alfresco.classifier>
+    </properties>
+
+    <dependencies>
         <dependency>
-            <groupId>com.ixxus.alfresco</groupId>
-            <artifactId>ixxus-category-i18n-alfresco</artifactId>
-            <version>4.1.1.2.6</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
         </dependency>
-
-	</dependencies>
-	
-	<profiles>
-		<!--Profile which should be triggered when integration tests are desired -->
-		<profile>
-			<id>it</id>
-
-			<dependencies>
-
-				<dependency>
-					<groupId>com.h2database</groupId>
-					<artifactId>h2</artifactId>
-					<version>1.3.166</version>
-					<scope>test</scope>
-				</dependency>
-
-				<!-- You will need to update the version of the h2-support component 
-					depending on the version of Alfresco you are using. Check the version matrix 
-					on https://github.com/skuro/alfresco-h2-support/wiki/H2-Database-support-for-Alfresco -->
-				<dependency>
-					<groupId>tk.skuro.alfresco</groupId>
-					<artifactId>h2-support</artifactId>
-					<version>1.5</version>
-					<scope>test</scope>
-				</dependency>
-				
-				<dependency>
-            		<groupId>com.ixxus.alfresco</groupId>
-            		<artifactId>ixxus-rights-management-alfresco</artifactId>
-            		<version>4.1.1.1.0.44</version>
-        		</dependency>
-
-        		<dependency>
-            		<groupId>com.oup</groupId>
-          			<artifactId>oup-rights-management-alfresco</artifactId>
-            		<version>4.1.1.1.0.45</version>
-        		</dependency>
-        
-        		<dependency>
-            		<groupId>com.oup</groupId>
-            		<artifactId>oup-content-model-alfresco</artifactId>
-            		<version>4.1.1.1.1.1</version>
-        		</dependency>
-
-			</dependencies>
-
-			<properties>
-				<filter.file>${project.build.testOutputDirectory}/alfresco-global.properties</filter.file>
-				<failsafe.test.includes>**/*IT.java</failsafe.test.includes>
-			</properties>
-
-			<build>
-				<defaultGoal>verify</defaultGoal>
-				<plugins>
-
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>properties-maven-plugin</artifactId>
-						<version>1.0-alpha-2</version>
-						<executions>
-							<execution>
-								<id>load-env-properties</id>
-								<phase>initialize</phase>
-								<goals>
-									<goal>read-project-properties</goal>
-								</goals>
-								<configuration>
-									<files>
-										<file>${filter.file}</file>
-									</files>
-									<quiet>false</quiet>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<plugin>
-						<groupId>org.beardedgeeks</groupId>
-						<artifactId>maven-merge-properties-plugin</artifactId>
-						<executions>
-							<execution>
-								<id>merge-test-properties</id>
-								<phase>validate</phase>
-								<goals>
-									<goal>merge</goal>
-								</goals>
-								<configuration>
-									<merges>
-										<merge>
-											<targetFile>${filter.file}</targetFile>
-											<propertiesFiles>
-												<propertiesFile>src/test/config/env.default.properties</propertiesFile>
-											</propertiesFiles>
-										</merge>
-									</merges>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-failsafe-plugin</artifactId>
-						<version>2.12.4</version>
-						<configuration>
-							<argLine>-Xms512m -Xmx512m -XX:MaxPermSize=512m -javaagent:${sonar.jacoco.jar}=destfile=${sonar.jacoco.itReportPath},includes=com.*</argLine>
-							<includes>
-								<include>${failsafe.test.includes}</include>
-							</includes>
-						</configuration>
-						<executions>
-							<execution>
-								<id>integration-test</id>
-								<phase>integration-test</phase>
-								<goals>
-									<goal>integration-test</goal>
-								</goals>
-							</execution>
-							<execution>
-								<id>verify-test</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>verify</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-
-					<!-- Drop test db before tests -->
-					<plugin>
-						<artifactId>maven-clean-plugin</artifactId>
-						<version>2.4.1</version>
-						<executions>
-							<execution>
-								<id>clean-alf-test-data</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-									<goal>clean</goal>
-								</goals>
-								<configuration>
-									<failOnError>false</failOnError>
-									<excludeDefaultDirectories>true</excludeDefaultDirectories>
-									<filesets>
-										<fileset>
-											<directory>${dir.root}</directory>
-										</fileset>
-									</filesets>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					
-					<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-					</configuration>
-					</plugin>
-
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-	
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>1.3.1</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+  <modules>
+    <module>MultiServicesSearch-alfresco</module>
+    <module>MultiServicesSearch-share</module>
+  </modules>
 </project>

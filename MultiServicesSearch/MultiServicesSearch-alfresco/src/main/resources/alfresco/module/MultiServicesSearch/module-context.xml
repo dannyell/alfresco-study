@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC '-//SPRING//DTD BEAN//EN' 'http://www.springframework.org/dtd/spring-beans.dtd'>
+<beans>
+
+    <!-- Bootstrap -->
+    <bean id="org_alfresco_module_Calais_dictionaryBootstrap" parent="dictionaryModelBootstrap" depends-on="dictionaryBootstrap">
+        <property name="models">
+            <list>
+                <value>alfresco/module/MultiServicesSearch/model/content-model.xml</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="webscript.com.study.alfresco.sampleWebScript.get" class="com.study.alfresco.SampleWebScript" parent="webscript"/>
+
+	<import resource="classpath:alfresco/module/MultiServicesSearch/context/webscript-context.xml" />
+	<import resource="classpath:alfresco/module/MultiServicesSearch/context/template-context.xml" />
+
+</beans>
